@@ -14,10 +14,11 @@ import java.util.List;
 
 public class AdminDao {
     private static final String CREATE_ADMIN_QUERY = "INSERT INTO admins(first_name,last_name,email,password) VALUES (?,?,?,?);";
-    private static final String DELETE_ADMIN_QUERY = "DELETE FROM admins where id = ?;";
+    private static final String DELETE_ADMIN_QUERY = "DELETE FROM admins WHERE id = ?;";
     private static final String FIND_ALL_ADMINS_QUERY = "SELECT * FROM admins;";
-    private static final String READ_ADMIN_QUERY = "SELECT * from admins where id = ?;";
+    private static final String READ_ADMIN_QUERY = "SELECT * FROM admins WHERE id = ?;";
     private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET first_name = ? , last_name = ?, email = ?, password = ? WHERE id = ?;";
+    private static final String READ_PASSWORD_QUERY = "SELECT password FROM admins WHERE email = ?;";
 
     public Admin read(Integer adminId) {
         Admin admin = new Admin();
@@ -120,6 +121,28 @@ public class AdminDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean verification (String email, String password){
+        boolean verification = false;
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_PASSWORD_QUERY)
+        ) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    String passwordHashed = resultSet.getString("password");
+                    if (BCrypt.checkpw(password, passwordHashed)){
+                        verification = true;
+                    }else {
+                        verification = false;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return verification;
     }
 
 }
