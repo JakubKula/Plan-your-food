@@ -20,8 +20,6 @@ public class RecipieList extends HttpServlet {
         response.getWriter().println(list.get(1).getName());
         session.setAttribute("list", list);
 
-        request.setCharacterEncoding("UTF-8");
-
         getServletContext().getRequestDispatcher("/app/recipe/RecipieList.jsp")
                 .forward(request, response);
     }
