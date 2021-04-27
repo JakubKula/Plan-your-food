@@ -12,12 +12,13 @@ import java.io.IOException;
 public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/register.jsp").forward(request, response);
+        response.sendRedirect("/register.jsp");
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String email = request.getParameter("email");
@@ -25,6 +26,6 @@ public class Register extends HttpServlet {
         Admin admin = new Admin(name,surname,email,password);
         AdminDao adminDao =new AdminDao();
         adminDao.create(admin);
-        request.getRequestDispatcher("/login").forward(request, response);
+        response.sendRedirect("/login.jsp");
     }
 }
