@@ -21,6 +21,8 @@ public class RecipieDao {
     private static final String CREATE_RECIPE_QUERY = "INSERT INTO recipe(name,ingredients,description,created,updated,preparation_time,preparation,admin_id) VALUES (?,?,?,?,?,?,?,?);";
     private static final String DELETE_RECIPE_QUERY = "DELETE FROM recipe where id = ?;";
 
+    private static final String USER_NUMBER_OF_RECIPE = "SELECT count(*) FROM recipe WHERE admin_id = ?";
+
 
     public List<Recipie> showAll() {
 
@@ -75,6 +77,24 @@ public class RecipieDao {
 
     }
 
+    public int numberOfRecipie(int userId) {
+
+        int value = 0;
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(USER_NUMBER_OF_RECIPE)
+        ) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                   value = resultSet.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
     public Recipie create(Recipie recipie) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement insertStm = connection.prepareStatement(CREATE_RECIPE_QUERY,
@@ -122,6 +142,8 @@ public class RecipieDao {
             e.printStackTrace();
         }
     }
+
+
 
     public void update(Recipie recipie, int recipieID) {
         try (Connection connection = DbUtil.getConnection();
