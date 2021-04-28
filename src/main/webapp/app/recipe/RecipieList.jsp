@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="pl-PL">
@@ -23,52 +23,14 @@
             Zaplanuj <span>Jedzonko</span>
         </a>
         <div class="d-flex justify-content-around">
-            <h4 class="text-light mr-3">Imię</h4>
+            <h4 class="text-light mr-3">${firstName}</h4>
             <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
         </div>
     </nav>
 </header>
 
 <section class="dashboard-section">
-    <div class="row dashboard-nowrap">
-        <ul class="nav flex-column long-bg">
-            <li class="nav-item">
-                <a class="nav-link" href="/dashboard.html">
-                    <span>Pulpit</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/app/recipe/list">
-                    <span>Przepisy</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/app-schedules.html">
-                    <span>Plany</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/edit/user/data">
-                    <span>Edytuj dane</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="/app-edit-password.html">
-                    <span>Zmień hasło</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/super-admin-users.html">
-                    <span>Użytkownicy</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
+    <%@include file="../dashboard.jsp"%>
 
 
         <div class="m-4 p-3 width-medium">
@@ -98,6 +60,7 @@
                     ${list.description}
                 </td>
                 <td class="col-2"><a href="/app/recipe/details?id=${list.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a>
+                <a href="/app/recipe/edit?id=${list.id}" class="btn btn-info rounded-0 text-light">Edycja</a>
                     <a onclick="javascript:confirmDelete(${list.id});" class="btn btn-info rounded-0 text-light" style="background: red">Usuń</a>
                     <script type="text/javascript">
                         function confirmDelete(id) {

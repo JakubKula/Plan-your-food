@@ -25,6 +25,9 @@ public class RecipieList extends HttpServlet {
       String adminId =   adminInt.toString();
       int admin = Integer.parseInt(adminId);
 
+        String name = (String)session.getAttribute("firstName");
+        session.setAttribute("firstName" , name);
+
         List<Recipie> list = recipieDao.showAllForAdmin(admin);
         session.setAttribute("list", list);
 

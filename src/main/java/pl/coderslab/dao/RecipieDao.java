@@ -14,7 +14,7 @@ public class RecipieDao {
 
 
 
-    private static final String UPDATE_RECIPE_QUERY = "UPDATE recipe SET name = ? , ingredients = ?, description = ?, created = ?, updated = ?, preparation_time = ?, preparation = ?, admin_id = ?,  WHERE	id = ?;";
+    private static final String UPDATE_RECIPE_QUERY = "UPDATE recipe SET name = ? , ingredients = ?, description = ?, updated = ?, preparation_time = ?, preparation = ?  WHERE	id = ?;";
 
     private static final String SHOW_ALL = "SELECT * FROM recipe;";
     private static final String READ_RECIPE_QUERY = "SELECT * from recipe where id = ?;";
@@ -181,12 +181,10 @@ public class RecipieDao {
             statement.setString(1, recipie.getName());
             statement.setString(2, recipie.getIngredients());
             statement.setString(3, recipie.getDescription());
-            statement.setString(4, recipie.getCreated());
-            statement.setString(5, recipie.getUpdated());
-            statement.setInt(6, recipie.getPreparationTime());
-            statement.setString(7, recipie.getPreparation());
-            statement.setInt(8, recipie.getAdminId());
-            statement.setInt(9, recipieID);
+            statement.setString(4, recipie.getUpdated());
+            statement.setInt(5, recipie.getPreparationTime());
+            statement.setString(6, recipie.getPreparation());
+            statement.setInt(7, recipieID);
 
             statement.executeUpdate();
         } catch (Exception e) {
