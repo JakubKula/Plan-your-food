@@ -1,23 +1,19 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
-import pl.coderslab.model.Book;
 import pl.coderslab.model.Plan;
 import pl.coderslab.utils.DbUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlanDao {
-    private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name,description,created) VALUES (?,?,?);";
-    private static final String DELETE_PLAN_QUERY = "DELETE FROM plan where id = ?;";
+    private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name,description,created,adminId) VALUES (?,?,?,?);";
+    private static final String DELETE_PLAN_QUERY = "DELETE FROM plan WHERE id = ?;";
     private static final String FIND_ALL_PLANS_QUERY = "SELECT * FROM plan;";
-    private static final String READ_PLAN_QUERY = "SELECT * from plan where id = ?;";
-    private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ?, created = ? WHERE	id = ?;";
+    private static final String READ_PLAN_QUERY = "SELECT * from plan WHERE id = ?;";
+    private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ?, created = ?, adminId = ? WHERE	id = ?;";
 
     public Plan read(Integer planId) {
         Plan plan = new Plan();
@@ -31,6 +27,7 @@ public class PlanDao {
                     plan.setName(resultSet.getString("name"));
                     plan.setDescription(resultSet.getString("description"));
                     plan.setCreated(resultSet.getDate("created"));
+                    plan.setId(resultSet.getInt("adminId"));
                 }
             }
         } catch (Exception e) {
@@ -52,6 +49,7 @@ public class PlanDao {
                 planToAdd.setName(resultSet.getString("name"));
                 planToAdd.setDescription(resultSet.getString("description"));
                 planToAdd.setCreated(resultSet.getDate("created"));
+                planToAdd.setId(resultSet.getInt("adminId"));
                 planList.add(planToAdd);
             }
 
@@ -68,7 +66,8 @@ public class PlanDao {
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             insertStm.setString(1, plan.getName());
             insertStm.setString(2, plan.getDescription());
-            insertStm.setString(3, plan.getCreated().toString());
+            insertStm.setDate(3, (Date) plan.getCreated());
+            insertStm.setInt(4, plan.getAdminId());
             int result = insertStm.executeUpdate();
 
             if (result != 1) {
@@ -108,10 +107,11 @@ public class PlanDao {
     public void update(Plan plan) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PLAN_QUERY)) {
-            statement.setInt(4, plan.getId());
+            statement.setInt(5, plan.getId());
             statement.setString(1, plan.getName());
             statement.setString(2, plan.getDescription());
-            statement.setString(3, plan.getCreated().toString());
+            statement.setDate(3, (Date) plan.getCreated());
+            statement.setInt(4, plan.getAdminId());
 
             statement.executeUpdate();
         } catch (Exception e) {
