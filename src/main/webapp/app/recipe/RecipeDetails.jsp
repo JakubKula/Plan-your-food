@@ -1,4 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -70,42 +69,64 @@
             </li>
         </ul>
 
-
-        <div class="m-4 p-3 width-medium">
+        <div class="m-4 p-3 width-medium text-color-darker">
             <div class="dashboard-content border-dashed p-3 m-4 view-height">
-                <div class="row border-bottom border-3 p-1 m-1">
-                    <div class="col noPadding"><h3 class="color-header text-uppercase">Lista Przepisów</h3></div>
-                    <div class="col noPadding d-flex justify-content-end mb-2"><a href="/app/recipe/add" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj przepis</a></div>
-                </div>
-                <table class="table border-bottom schedules-content">
-        <thead>
-        <tr class="d-flex text-color-darker">
-            <th scope="col" class="col-1">ID</th>
-            <th scope="col" class="col-5">NAZWA</th>
-            <th scope="col" class="col-5">OPIS</th>
-            <th scope="col" class="col-1">AKCJE</th>
-        </tr>
-        </thead>
-        <c:forEach var="list" items="${list}">
-        <tbody class="text-color-lighter">
-            <tr class="d-flex">
-                <th scope="row" class="col-1">${list.id}</th>
-                <td class="col-5">
-                    ${list.name}
-                </td>
-                <td class="col-5">
-                    ${list.description}
-                </td>
-                <td class="col-1"><a href="/app/recipe/details?id=${list.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a></td>
-            </tr>
-        </tbody>
-        </c:forEach>
-    </table>
+                <div class="mt-4 ml-4 mr-4">
+                    <div class="row border-bottom border-3">
+                        <div class="col"><h3 class="color-header text-uppercase">Szczegóły przepisu</h3></div>
+                        <div class="col d-flex justify-content-end mb-2"><a href="/app/recipe/list" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Powrót</a></div>
+                    </div>
 
+                    <table class="table borderless">
+                        <tbody>
+                        <tr class="d-flex">
+                            <th scope="row" class="col-2">Nazwa Przepisu</th>
+                            <td class="col-7">
+                                ${detail.name}
+                            </td>
+                        </tr>
+                        <tr class="d-flex">
+                            <th scope="row" class="col-2">Opis przepisu</th>
+                            <td class="col-7">${detail.description}</td>
+                        </tr>
+                        <tr class="d-flex">
+                            <th scope="row" class="col-2">Przygotowanie (minuty)</th>
+                            <td class="col-7">
+                                ${detail.preparationTime}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row d-flex">
+                        <div class="col-5 border-bottom border-3"><h3 class="text-uppercase">Sposób przygotowania</h3></div>
+                        <div class="col-2"></div>
+                        <div class="col-5 border-bottom border-3"><h3 class="text-uppercase">Składniki</h3></div>
+                    </div>
+                    <div class="row d-flex">
+                        <div class="col-5 p-4">
+                            <p>${detail.preparation}</p>
+                        </div>
+                        <div class="col-2"></div>
+                        <ul class="col-5 p-4 list-unstyled">
+                            <li>${detail.ingredients}</li>
+                            <li>ziemniaki 500g</li>
+                            <li>Fix Naturalnie makaronowa z szynką Knorr 1 szt.</li>
+                            <li>średnia cebula 1szt.</li>
+                            <li>ząbek czosnku 1szt.</li>
+                            <li>kiełbasa np. śląska 500g</li>
+                            <li>śmietana 18% 200 ml</li>
+                            <li>Rama Smaż jak szef kuchni, wariant klasyczny 4 łyżki</li>
+                            <li>gałązka tymianku 1 szt.</li>
+                        </ul>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
