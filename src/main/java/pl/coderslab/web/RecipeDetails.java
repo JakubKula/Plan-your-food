@@ -7,22 +7,24 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "RecipieList", value = "/app/recipe/list")
-public class RecipieList extends HttpServlet {
+@WebServlet(name = "RecipeDetails", value = "/app/recipe/details")
+public class RecipeDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession();
+        String idString = request.getParameter("id");
+        int id = Integer.parseInt(idString);
+
         RecipieDao recipieDao = new RecipieDao();
+        Recipie recipe = recipieDao.read(id);
 
-        List<Recipie> list = recipieDao.showAll();
-        response.getWriter().println(list.get(1).getName());
-        session.setAttribute("list", list);
+        response.getWriter().println(recipieDao.read(id));
+        HttpSession session = request.getSession();
+        session.setAttribute("detail", recipe);
 
-        getServletContext().getRequestDispatcher("/app/recipe/RecipieList.jsp")
+        getServletContext().getRequestDispatcher("/app/recipe/RecipeDetails.jsp")
                 .forward(request, response);
     }
 
