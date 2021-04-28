@@ -16,7 +16,7 @@ public class Logout extends HttpServlet {
             boolean login = (boolean) session.getAttribute("login");
             request.setAttribute("name",name);
         }
-        getServletContext().getRequestDispatcher("/logout.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/app/main/logout.jsp").forward(request, response);
     }
 
     @Override

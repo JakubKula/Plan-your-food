@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/app/main/login.jsp").forward(request, response);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
 
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Email or password incorrect, try again');");
-            out.println("location='login.jsp';");
+            out.println("location='login';");
             out.println("</script>");
 //            response.sendRedirect("/login.jsp");
         }

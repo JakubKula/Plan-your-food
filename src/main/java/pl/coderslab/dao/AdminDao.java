@@ -17,7 +17,7 @@ public class AdminDao {
     private static final String DELETE_ADMIN_QUERY = "DELETE FROM admins WHERE id = ?;";
     private static final String FIND_ALL_ADMINS_QUERY = "SELECT * FROM admins;";
     private static final String READ_ADMIN_QUERY = "SELECT * FROM admins WHERE id = ?;";
-    private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET first_name = ? , last_name = ?, email = ?, password = ? WHERE id = ?;";
+    private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET first_name = ? , last_name = ?, email = ? WHERE id = ?;";
     private static final String READ_PASSWORD_QUERY = "SELECT password FROM admins WHERE email = ?;";
     private static final String READ_ADMIN_EMAIL_QUERY = "SELECT * FROM admins WHERE email = ?;";
 
@@ -112,11 +112,11 @@ public class AdminDao {
     public void update(Admin admin) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ADMIN_QUERY)) {
-            statement.setInt(5, admin.getId());
+            statement.setInt(4, admin.getId());
             statement.setString(1, admin.getFirstName());
             statement.setString(2, admin.getLastName());
             statement.setString(3, admin.getEmail());
-            statement.setString(4, BCrypt.hashpw(admin.getPassword(), BCrypt.gensalt(12)));
+//            statement.setString(4, BCrypt.hashpw(admin.getPassword(), BCrypt.gensalt(12)));
 
             statement.executeUpdate();
         } catch (Exception e) {

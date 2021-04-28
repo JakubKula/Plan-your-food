@@ -18,7 +18,7 @@ public class About extends HttpServlet {
                 request.setAttribute("name",name);
             }
         }
-        getServletContext().getRequestDispatcher("/about.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/app/main/about.jsp").forward(request, response);
     }
 
     @Override

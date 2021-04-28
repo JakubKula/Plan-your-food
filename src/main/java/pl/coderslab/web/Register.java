@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/register.jsp");
+        response.sendRedirect("/app/main/register.jsp");
 
     }
 
@@ -26,6 +26,6 @@ public class Register extends HttpServlet {
         Admin admin = new Admin(name,surname,email,password);
         AdminDao adminDao =new AdminDao();
         adminDao.create(admin);
-        response.sendRedirect("/login.jsp");
+        response.sendRedirect("/login");
     }
 }
