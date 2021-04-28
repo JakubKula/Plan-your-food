@@ -7,6 +7,7 @@ public class Plan {
     private String name;
     private String description;
     private Date created;
+    private int adminId;
 
     public Plan(int id, String name, String description, Date created, int adminId) {
         this.id = id;
@@ -38,6 +39,10 @@ public class Plan {
     public String getDescription() {
         return description;
     }
+    
+    public int getAdminId() {
+        return adminId;
+    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -49,6 +54,10 @@ public class Plan {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+    
+    public void setadminId(int adminId) {
+        this.adminId = adminId;
     }
 
 
@@ -62,4 +71,5 @@ public class Plan {
                 ", created=" + created +
                 '}';
     }
+    
 }
