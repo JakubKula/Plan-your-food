@@ -30,6 +30,6 @@ public class HomeServlet extends HttpServlet {
                 request.setAttribute("name",name);
             }
         }
-        getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/app/main/home.jsp").forward(request, response);
     }
 }
