@@ -19,6 +19,7 @@ public class AdminDao {
     private static final String READ_ADMIN_QUERY = "SELECT * FROM admins WHERE id = ?;";
     private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET first_name = ? , last_name = ?, email = ?, password = ? WHERE id = ?;";
     private static final String READ_PASSWORD_QUERY = "SELECT password FROM admins WHERE email = ?;";
+    private static final String READ_ADMIN_EMAIL_QUERY = "SELECT * FROM admins WHERE email = ?;";
 
     public Admin read(Integer adminId) {
         Admin admin = new Admin();
@@ -143,6 +144,27 @@ public class AdminDao {
             e.printStackTrace();
         }
         return verification;
+    }
+
+    public Admin readByEmail(String adminEmail) {
+        Admin admin = new Admin();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_ADMIN_EMAIL_QUERY)
+        ) {
+            statement.setString(1, adminEmail);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    admin.setId(resultSet.getInt("id"));
+                    admin.setFirstName(resultSet.getString("first_name"));
+                    admin.setLastName(resultSet.getString("last_name"));
+                    admin.setEmail(resultSet.getString("email"));
+                    admin.setPassword(resultSet.getString("password"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return admin;
     }
 
 }
