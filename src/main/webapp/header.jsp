@@ -1,3 +1,5 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +16,35 @@
 </head>
 
 <body>
+<c:choose>
+<c:when test="${login}">
+<header class="page-header">
+    <nav class="navbar navbar-expand-lg justify-content-around">
+        <a href="/" class="navbar-brand main-logo">
+            Zaplanuj <span>Jedzonko</span>
+        </a>
+        <ul class="nav nounderline text-uppercase">
+            <li class="nav-item ml-4">
+                <a class="nav-link color-header" href="/logout">Zalogowany(${name})</a>
+            </li>
+            <li class="nav-item ml-4">
+                <a class="nav-link color-header" href="/logout">rejestracja</a>
+            </li>
+            <li class="nav-item ml-4">
+                <a class="nav-link" href="/about">o aplikacji</a>
+            </li>
+            <li class="nav-item ml-4">
+                <a class="nav-link disabled" href="/app/recipe/list">Przepisy</a>
+            </li>
+            <li class="nav-item ml-4">
+                <a class="nav-link disabled" href="/contact">Kontakt</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<br />
+</c:when>
+<c:otherwise>
 <header class="page-header">
     <nav class="navbar navbar-expand-lg justify-content-around">
         <a href="/" class="navbar-brand main-logo">
@@ -27,14 +58,22 @@
                 <a class="nav-link color-header" href="/register">rejestracja</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link" href="#about">o aplikacji</a>
+                <a class="nav-link" href="/about">o aplikacji</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link disabled" href="recipes.html">Przepisy</a>
+                <a class="nav-link disabled" href="/login">Przepisy</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link disabled" href="#contact">Kontakt</a>
+                <a class="nav-link disabled" href="/contact">Kontakt</a>
             </li>
         </ul>
     </nav>
 </header>
+</c:otherwise>
+</c:choose>
+
+
+
+
+
+

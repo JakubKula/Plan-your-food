@@ -18,6 +18,7 @@ public class RecipieDao {
 
     private static final String SHOW_ALL = "SELECT * FROM recipe;";
     private static final String READ_RECIPE_QUERY = "SELECT * from recipe where id = ?;";
+    private static final String READ_RECIPE_QUERY_FOR_ADMIN = "SELECT * from recipe where admin_id = ?;";
     private static final String CREATE_RECIPE_QUERY = "INSERT INTO recipe(name,ingredients,description,created,updated,preparation_time,preparation,admin_id) VALUES (?,?,?,?,?,?,?,?);";
     private static final String DELETE_RECIPE_QUERY = "DELETE FROM recipe where id = ?;";
 
@@ -30,6 +31,34 @@ public class RecipieDao {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(SHOW_ALL)
         ) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Recipie recipie = new Recipie();
+                    recipie.setId(resultSet.getInt("id"));
+                    recipie.setName(resultSet.getString("name"));
+                    recipie.setIngredients(resultSet.getString("ingredients"));
+                    recipie.setDescription(resultSet.getString("description"));
+                    recipie.setCreated(resultSet.getString("created"));
+                    recipie.setUpdated(resultSet.getString("updated"));
+                    recipie.setPreparationTime(resultSet.getInt("preparation_time"));
+                    recipie.setPreparation(resultSet.getString("preparation"));
+                    recipie.setAdminId(resultSet.getInt("admin_id"));
+                    list.add(recipie);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Recipie> showAllForAdmin(int AdminId) {
+
+        List<Recipie> list = new ArrayList<>();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_RECIPE_QUERY_FOR_ADMIN)
+        ) {
+            statement.setInt(1, AdminId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     Recipie recipie = new Recipie();

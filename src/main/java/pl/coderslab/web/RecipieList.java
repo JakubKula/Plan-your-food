@@ -1,6 +1,7 @@
 package pl.coderslab.web;
 
 import pl.coderslab.dao.RecipieDao;
+import pl.coderslab.model.Admin;
 import pl.coderslab.model.Recipie;
 
 import javax.servlet.*;
@@ -18,8 +19,15 @@ public class RecipieList extends HttpServlet {
         HttpSession session = request.getSession();
         RecipieDao recipieDao = new RecipieDao();
 
-        List<Recipie> list = recipieDao.showAll();
-        response.getWriter().println(list.get(1).getName());
+        HttpSession session2 = request.getSession();
+
+         Object adminInt = session2.getAttribute("id");
+      String adminId =   adminInt.toString();
+      int admin = Integer.parseInt(adminId);
+        System.out.println(admin);
+
+        List<Recipie> list = recipieDao.showAllForAdmin(admin);
+   //     response.getWriter().println(list.get(1).getName());
         session.setAttribute("list", list);
 
         getServletContext().getRequestDispatcher("/app/recipe/RecipieList.jsp")

@@ -1,6 +1,7 @@
 package pl.coderslab.web;
 
 import pl.coderslab.dao.AdminDao;
+import pl.coderslab.model.Admin;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,7 +13,7 @@ import java.io.PrintWriter;
 public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/login.jsp");
+        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     @Override
@@ -22,9 +23,17 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
         AdminDao adminDao = new AdminDao();
         boolean logIN = adminDao.verification(email, password);
-        System.out.println(logIN);
+        HttpSession session = request.getSession();
+        session.setAttribute("login", "");
         if(logIN){
-            response.sendRedirect("/home.jsp");
+            Admin admin = adminDao.readByEmail(email);
+            session.setAttribute("login", true);
+            session.setAttribute("id",admin.getId());
+            session.setAttribute("firstName",admin.getFirstName());
+            session.setAttribute("lastName",admin.getLastName());
+            session.setAttribute("email",admin.getEmail());
+            response.sendRedirect("/");
+//            getServletContext().getRequestDispatcher("/").forward(request, response);//nie wiem na razie tak jest
         }
         if(!logIN) {
             PrintWriter out = response.getWriter();

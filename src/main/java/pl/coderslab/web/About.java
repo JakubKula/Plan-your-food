@@ -1,25 +1,13 @@
 package pl.coderslab.web;
 
-import pl.coderslab.dao.AdminDao;
-import pl.coderslab.dao.BookDao;
-import pl.coderslab.model.Admin;
-import pl.coderslab.model.Book;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
 
-/**
- * Do not change servlet address !!!
- */
-@WebServlet("")
-public class HomeServlet extends HttpServlet {
-
+@WebServlet(name = "About", value = "/about")
+public class About extends HttpServlet {
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         if(session.getAttribute("login") != null){
@@ -30,6 +18,11 @@ public class HomeServlet extends HttpServlet {
                 request.setAttribute("name",name);
             }
         }
-        getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/about.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }
