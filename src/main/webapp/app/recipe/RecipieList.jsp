@@ -81,30 +81,30 @@
         <thead>
         <tr class="d-flex text-color-darker">
             <th scope="col" class="col-1">ID</th>
-            <th scope="col" class="col-5">NAZWA</th>
+            <th scope="col" class="col-4">NAZWA</th>
             <th scope="col" class="col-5">OPIS</th>
-            <th scope="col" class="col-1">AKCJE</th>
+            <th scope="col" class="col-2">AKCJE</th>
         </tr>
         </thead>
-        <c:forEach var="list" items="${list}">
+        <c:forEach var="list" items="${list}" >
         <tbody class="text-color-lighter">
             <tr class="d-flex">
                 <th scope="row" class="col-1">${list.id}</th>
-                <td class="col-5">
+                <c:set var="name" value="${list.id}" scope="session" />
+                <td class="col-4">
                     ${list.name}
                 </td>
                 <td class="col-5">
                     ${list.description}
                 </td>
-                <td class="col-1"><a href="/app/recipe/details?id=${list.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a>
+                <td class="col-2"><a href="/app/recipe/details?id=${list.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a>
                     <a onclick="javascript:confirmDelete(${list.id});" class="btn btn-info rounded-0 text-light" style="background: red">Usuń</a>
                     <script type="text/javascript">
                         function confirmDelete(id) {
                             var status = confirm("Are you sure you want to delete?");
                             if(status)
                             {
-                                parent.location.replace("/app/recipe/remove?id="+id);
-                            }
+                                parent.location.replace("/app/recipe/remove?identity="+id);}
                         }
                     </script>
                 </td>

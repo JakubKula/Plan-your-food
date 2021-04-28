@@ -157,10 +157,10 @@ public class RecipieDao {
         return null;
     }
 
-    public void delete(int recipieId) {
+    public void delete(int Id) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_RECIPE_QUERY)) {
-            statement.setInt(1, recipieId);
+            statement.setInt(1, Id);
             statement.executeUpdate();
 
             boolean deleted = statement.execute();

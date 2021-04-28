@@ -35,7 +35,13 @@ public class AddRecipe extends HttpServlet {
         String preparation = request.getParameter("prep");
         String igredients = request.getParameter("igred");
 
-        Recipie recipie = new Recipie(name,igredients,description, currentDate, currentDate,prepTimeInt,preparation, 1);
+        HttpSession session2 = request.getSession();
+
+        Object adminInt = session2.getAttribute("id");
+        String adminId =   adminInt.toString();
+        int admin = Integer.parseInt(adminId);
+
+        Recipie recipie = new Recipie(name,igredients,description, currentDate, currentDate,prepTimeInt,preparation, admin);
 
         RecipieDao recipieDao = new RecipieDao();
         recipieDao.create(recipie);

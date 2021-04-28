@@ -24,10 +24,8 @@ public class RecipieList extends HttpServlet {
          Object adminInt = session2.getAttribute("id");
       String adminId =   adminInt.toString();
       int admin = Integer.parseInt(adminId);
-        System.out.println(admin);
 
         List<Recipie> list = recipieDao.showAllForAdmin(admin);
-   //     response.getWriter().println(list.get(1).getName());
         session.setAttribute("list", list);
 
         getServletContext().getRequestDispatcher("/app/recipe/RecipieList.jsp")
