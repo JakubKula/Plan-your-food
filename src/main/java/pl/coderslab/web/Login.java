@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
 
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Email or password incorrect, try again');");
-            out.println("location='login.jsp';");
+            out.println("location='login';");
             out.println("</script>");
 //            response.sendRedirect("/login.jsp");
         }
