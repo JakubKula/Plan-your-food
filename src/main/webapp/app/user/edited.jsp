@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl-PL">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="utf-8">
@@ -36,9 +37,11 @@
                 <div class="mt-4 ml-4 mr-4">
                     <div class="container w-25">
                 <p>Dane zostały zedytowane</p>
+                        <button class="btn btn-color rounded-0" type="button">
+                            <a href="<c:url value="/"></c:url>">OK</a></button>
                     </div>
-                </div>
 
+                </div>
         </div>
     </div>
     </div>
