@@ -96,7 +96,18 @@
                 <td class="col-5">
                     ${list.description}
                 </td>
-                <td class="col-1"><a href="/app/recipe/details?id=${list.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a></td>
+                <td class="col-1"><a href="/app/recipe/details?id=${list.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a>
+                    <a onclick="javascript:confirmDelete(${list.id});" class="btn btn-info rounded-0 text-light" style="background: red">Usuń</a>
+                    <script type="text/javascript">
+                        function confirmDelete(id) {
+                            var status = confirm("Are you sure you want to delete?");
+                            if(status)
+                            {
+                                parent.location.replace("/app/recipe/remove?id="+id);
+                            }
+                        }
+                    </script>
+                </td>
             </tr>
         </tbody>
         </c:forEach>
