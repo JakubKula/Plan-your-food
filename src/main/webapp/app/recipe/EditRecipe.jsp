@@ -77,7 +77,7 @@
                         </div>
                         <div class="col-2"></div>
                         <div class="col-5 p-4">
-                            <textarea class="w-100 p-1" rows="10" name="prep">${editDetali.ingredients}</textarea>
+                            <textarea class="w-100 p-1" rows="10" name="igred">${editDetali.ingredients}</textarea>
                         </div>
                     </div>
                 </form>
