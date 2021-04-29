@@ -30,8 +30,8 @@
 </header>
 
 <section class="dashboard-section">
-    <%@include file="../dashboard.jsp"%>
 
+    <%@include file="../dashboard.jsp"%>
 
         <div class="m-4 p-3 width-medium">
             <div class="dashboard-content border-dashed p-3 m-4 view-height">
