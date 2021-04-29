@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 
 public class RecipePlanDao {
 
-    private static final String ADD_RECIPE_TO_PLAN_QUERY = "INSERT INTO recipe-plan(recipeId,mealName,displayOrder,dayNameId,PlanID) VALUES (?,?,?,?,?);";
+    private static final String ADD_RECIPE_TO_PLAN_QUERY = "INSERT INTO recipe_plan(recipe_id,meal_name,display_order,day_name_id,plan_id) VALUES (?,?,?,?,?);";
 
     public RecipePlan create(RecipePlan recipePlan) {
         try (Connection connection = DbUtil.getConnection();
