@@ -11,14 +11,14 @@ import java.io.IOException;
 public class Remove extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       String IdString = request.getParameter("id");
-       int id = Integer.parseInt(IdString);
+       String IdString = request.getParameter("identity");
+       int identity = Integer.parseInt(IdString);
 
         RecipieDao recipieDao = new RecipieDao();
-        recipieDao.delete(id);
+        System.out.println(identity);
+        recipieDao.delete(identity);
 
-        getServletContext().getRequestDispatcher("/app/recipe/list").forward(request, response);
-
+        response.sendRedirect("/app/recipe/list");
     }
 
     @Override

@@ -10,13 +10,23 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet(name = "AddRecipe", value = "/app/recipe/add")
-public class AddRecipe extends HttpServlet {
+@WebServlet(name = "EditRecipe", value = "/app/recipe/edit")
+public class EditRecipe extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        getServletContext().getRequestDispatcher("/app/recipe/AddRecipe.jsp")
+        String idString = request.getParameter("id");
+        int id = Integer.parseInt(idString);
+
+        RecipieDao recipieDao = new RecipieDao();
+        Recipie editDetal = recipieDao.read(id);
+
+        response.getWriter().println(recipieDao.read(id));
+        HttpSession session = request.getSession();
+        session.setAttribute("editDetali", editDetal);
+
+        getServletContext().getRequestDispatcher("/app/recipe/EditRecipe.jsp")
                 .forward(request, response);
     }
 
@@ -28,12 +38,14 @@ public class AddRecipe extends HttpServlet {
         Date date = new Date(System.currentTimeMillis());
         String currentDate = (formatter.format(date));
 
-        String name = request.getParameter("name");
+        String name = request.getParameter("nameEdit");
         String description = request.getParameter("disc");
         String prepTime = request.getParameter("prepTime");
         int prepTimeInt = Integer.parseInt(prepTime);
         String preparation = request.getParameter("prep");
         String igredients = request.getParameter("igred");
+        String editID = request.getParameter("idofEdit");
+        int editIdInt = Integer.parseInt(editID);
 
         HttpSession session2 = request.getSession();
 
@@ -44,9 +56,8 @@ public class AddRecipe extends HttpServlet {
         Recipie recipie = new Recipie(name,igredients,description, currentDate, currentDate,prepTimeInt,preparation, admin);
 
         RecipieDao recipieDao = new RecipieDao();
-        recipieDao.create(recipie);
+        recipieDao.update(recipie, editIdInt);
 
         response.sendRedirect("/app/recipe/list");
-
     }
 }
