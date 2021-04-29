@@ -2,6 +2,7 @@
 <html lang="pl-PL">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
+    <title>Edit_data</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Zaplanuj Jedzonko</title>
@@ -35,7 +36,7 @@
             <div class="m-4 border-dashed view-height">
                 <!-- fix action, method -->
                 <!-- add name attribute for all inputs -->
-                <form action="/edited/user/data" method="post">
+                <form action="/edit/user/data" method="post">
                     <div class="mt-4 ml-4 mr-4">
                         <div class="row border-bottom border-3">
                             <div class="col"><h3 class="color-header text-uppercase">Edytuj dane</h3></div>
