@@ -9,15 +9,23 @@ public class Plan {
     private Date created;
     private int adminId;
 
-    public Plan(int id, String name, String description, Date created, int adminId) {
+    public Plan() {
+
+    }
+
+    public Plan(int id, String name, String description, Date created) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.created = created;
     }
 
-    public Plan() {
-
+    public Plan(int id, String name, String description, Date created, int adminId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.created = created;
+        this.adminId = adminId;
     }
 
     public int getId() {
