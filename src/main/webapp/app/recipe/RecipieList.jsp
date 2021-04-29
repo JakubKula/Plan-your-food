@@ -33,7 +33,7 @@
     <div class="row dashboard-nowrap">
         <ul class="nav flex-column long-bg">
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard.html">
+                <a class="nav-link" href="/desktop">
                     <span>Pulpit</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
@@ -57,7 +57,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="/app-edit-password.html">
+                <a class="nav-link disabled" href="/edit/user/password">
                     <span>Zmień hasło</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
