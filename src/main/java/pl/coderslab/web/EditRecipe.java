@@ -26,6 +26,11 @@ public class EditRecipe extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("editDetali", editDetal);
 
+        if((boolean) session.getAttribute("superadmin")){
+            boolean isSuperAdmin = (boolean) session.getAttribute("superadmin");
+            request.setAttribute("superAdmin", isSuperAdmin);
+        }
+
         getServletContext().getRequestDispatcher("/app/recipe/EditRecipe.jsp")
                 .forward(request, response);
     }
