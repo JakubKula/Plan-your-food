@@ -15,6 +15,8 @@ public class EditUserPassword extends HttpServlet {
         HttpSession session = request.getSession();
         int id = (int) session.getAttribute("id");
         String firstName = (String) session.getAttribute("firstName");
+        boolean isSuperAdmin = (boolean) session.getAttribute("superadmin");
+        request.setAttribute("superAdmin", isSuperAdmin);
         request.setAttribute("firstName",firstName);
         getServletContext().getRequestDispatcher("/app/user/editPass.jsp").forward(request, response);
     }

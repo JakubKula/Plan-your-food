@@ -32,6 +32,13 @@ public class Login extends HttpServlet {
             session.setAttribute("firstName",admin.getFirstName());
             session.setAttribute("lastName",admin.getLastName());
             session.setAttribute("email",admin.getEmail());
+            boolean isSuperAdmin = adminDao.superAdmin(email);
+            session.setAttribute("superadmin", "");
+            if(isSuperAdmin){
+                session.setAttribute("superadmin", true);
+            }else {
+                session.setAttribute("superadmin", false);
+            }
             response.sendRedirect("/");
 //            getServletContext().getRequestDispatcher("/").forward(request, response);//nie wiem na razie tak jest
         }

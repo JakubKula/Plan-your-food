@@ -2,7 +2,7 @@ package pl.coderslab.dao;
 
 import org.mindrot.jbcrypt.BCrypt;
 import pl.coderslab.exception.NotFoundException;
-import pl.coderslab.model.Admin;
+import pl.coderslab.model.*;
 import pl.coderslab.utils.DbUtil;
 
 import java.sql.Connection;
@@ -21,6 +21,7 @@ public class AdminDao {
     private static final String READ_PASSWORD_QUERY = "SELECT password FROM admins WHERE email = ?;";
     private static final String READ_ADMIN_EMAIL_QUERY = "SELECT * FROM admins WHERE email = ?;";
     private static final String UPDATE_ADMIN_PASSWORD_QUERY = "UPDATE admins SET password = ? WHERE id = ?;";
+    private static final String CHECK_IF_SUPERADMIN = "SELECT superadmin FROM admins where email = ?;;";
 
     public Admin read(Integer adminId) {
         Admin admin = new Admin();
@@ -177,6 +178,26 @@ public class AdminDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean superAdmin(String email){
+        boolean superAdmin = false;
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(CHECK_IF_SUPERADMIN)
+        ) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int isSuper = resultSet.getInt("superadmin");
+                    if(isSuper == 1){
+                        superAdmin = true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return superAdmin;
     }
 
 }

@@ -15,7 +15,7 @@ public class PlanDao {
     private static final String FIND_ALL_PLANS_BY_ADMIN_QUERY = "SELECT * FROM plan WHERE id = ?;";
     private static final String READ_PLAN_QUERY = "SELECT * from plan WHERE id = ?;";
     private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ?, created = ?, adminId = ? WHERE	id = ?;";
-    private static final String PLANS_NUMBER_QUERY = "SELECT COUNT(adminId) AS plans FROM plan WHERE adminId = ?;";
+    private static final String PLANS_NUMBER_QUERY = "SELECT COUNT(admin_id) AS plans FROM plan WHERE admin_id = ?;";
     private static final String RECENT_PLAN_QUERY = "SELECT day_name.name as day_name, meal_name,  recipe.name as recipe_name, recipe.description as recipe_description " +
             "FROM `recipe_plan` " +
             "JOIN day_name on day_name.id=day_name_id " +
