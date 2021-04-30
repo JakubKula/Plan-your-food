@@ -70,7 +70,7 @@ public class AddRecipeToPlan extends HttpServlet {
         recipePlanDao.create(recipePlan);
 
 
-        response.getWriter().println(choosePlan +" "+ mealName + " " + mealNumber +" " + recipeId +" "+ dayNameId);
+        response.sendRedirect("/app/recipe/plan/add");
 
 
     }
