@@ -29,10 +29,10 @@ public class EditUserPassword extends HttpServlet {
         String email = (String) session.getAttribute("email");
         String activePass = request.getParameter("activePass");
         AdminDao adminDao = new AdminDao();
-        boolean verification = adminDao.verification(email,activePass);
+        String verification = adminDao.verification(email,activePass);
         String firstName = (String) session.getAttribute("firstName");
         request.setAttribute("firstName",firstName);
-        if(verification){
+        if(verification.equals("log")){
             String newPassword = request.getParameter("newPass");
             adminDao.updatePassword(id, newPassword);
             getServletContext().getRequestDispatcher("/app/user/edited.jsp").forward(request, response);

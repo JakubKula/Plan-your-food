@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login_not_unique</title>
+    <title>Login not unique</title>
 </head>
 <body>
 <%@include file="/header.jsp"%>
