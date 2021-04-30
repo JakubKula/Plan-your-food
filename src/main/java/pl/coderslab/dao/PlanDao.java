@@ -22,7 +22,7 @@ public class PlanDao {
             "JOIN recipe on recipe.id=recipe_id WHERE " +
             "recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?) " +
             "ORDER by day_name.display_order, recipe_plan.display_order;";
-    private static final String RECENT_PLAN_NAME_QUERY = "SELECT MAX(created), name FROM plan WHERE admin_id = ?;";
+    private static final String RECENT_PLAN_NAME_QUERY = "SELECT name FROM plan WHERE admin_id = 1 ORDER BY created DESC LIMIT 1;";
 
     public Plan read(Integer planId) {
         Plan plan = new Plan();
