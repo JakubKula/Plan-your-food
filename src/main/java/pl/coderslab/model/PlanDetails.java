@@ -4,16 +4,14 @@ public class PlanDetails {
     private String dayName;
     private String mealName;
     private String recipeName;
-    private String recipeDescription;
 
     public PlanDetails() {
     }
 
-    public PlanDetails(String dayName, String mealName, String recipeName, String recipeDescription) {
+    public PlanDetails(String dayName, String mealName, String recipeName) {
         this.dayName = dayName;
         this.mealName = mealName;
         this.recipeName = recipeName;
-        this.recipeDescription = recipeDescription;
     }
 
     public String getDayName() {
@@ -40,13 +38,7 @@ public class PlanDetails {
         this.recipeName = recipeName;
     }
 
-    public String getRecipeDescription() {
-        return recipeDescription;
-    }
 
-    public void setRecipeDescription(String recipeDescription) {
-        this.recipeDescription = recipeDescription;
-    }
 
     @Override
     public String toString() {
@@ -54,7 +46,6 @@ public class PlanDetails {
                 "dayName='" + dayName + '\'' +
                 ", mealName='" + mealName + '\'' +
                 ", recipeName='" + recipeName + '\'' +
-                ", recipeDescription='" + recipeDescription + '\'' +
                 '}';
     }
 }
