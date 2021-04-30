@@ -2,9 +2,11 @@ package pl.coderslab.web;
 
 import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.dao.PlanDao;
+import pl.coderslab.dao.RecipePlanDao;
 import pl.coderslab.dao.RecipieDao;
 import pl.coderslab.model.DayName;
 import pl.coderslab.model.Plan;
+import pl.coderslab.model.RecipePlan;
 import pl.coderslab.model.Recipie;
 
 import javax.servlet.*;
@@ -25,13 +27,13 @@ public class AddRecipeToPlan extends HttpServlet {
         String name = (String) session3.getAttribute("firstName");
         session3.setAttribute("firstName", name);
 
-//        PlanDao planDao = new PlanDao();
-//        List<Plan> listOfPlans = planDao.findAll();
-//        session3.setAttribute("listOfPlans", listOfPlans);
-
         Object adminInt = session3.getAttribute("id");
         String adminId = adminInt.toString();
         int admin = Integer.parseInt(adminId);
+
+        PlanDao planDao = new PlanDao();
+        List<Plan> listOfPlans = planDao.findAll(admin);
+        session3.setAttribute("listOfPlans", listOfPlans);
 
         RecipieDao recipieDao = new RecipieDao();
         recipieDao.showAllForAdmin(admin);
@@ -45,7 +47,6 @@ public class AddRecipeToPlan extends HttpServlet {
         getServletContext().getRequestDispatcher("/app/recipe/AddRecipeToPlan.jsp")
                 .forward(request, response);
 
-
     }
 
     @Override
@@ -54,13 +55,22 @@ public class AddRecipeToPlan extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String choosePlan = request.getParameter("choosePlan");
+        int planId = Integer.parseInt(choosePlan);
         String mealName = request.getParameter("mealName");
         String mealNumber = request.getParameter("mealNumber");
+        int displayOrder = Integer.parseInt(mealNumber);
         String recipeId = request.getParameter("recipeId");
+        int recipeIdInt = Integer.parseInt(recipeId);
         String dayNameId = request.getParameter("dayNameId");
+        int dayNameIdInt = Integer.parseInt(dayNameId);
+
+        RecipePlan recipePlan = new RecipePlan(recipeIdInt,mealName,displayOrder,dayNameIdInt,planId);
+
+        RecipePlanDao recipePlanDao = new RecipePlanDao();
+        recipePlanDao.create(recipePlan);
 
 
-        response.getWriter().println(choosePlan + mealName + mealNumber + recipeId + dayNameId);
+        response.getWriter().println(choosePlan +" "+ mealName + " " + mealNumber +" " + recipeId +" "+ dayNameId);
 
 
     }

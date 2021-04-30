@@ -54,14 +54,6 @@
                     <div class="col-2"></div>
                     <ul class="col-5 p-4 list-unstyled">
                         <li>${detail.ingredients}</li>
-                        <li>ziemniaki 500g</li>
-                        <li>Fix Naturalnie makaronowa z szynką Knorr 1 szt.</li>
-                        <li>średnia cebula 1szt.</li>
-                        <li>ząbek czosnku 1szt.</li>
-                        <li>kiełbasa np. śląska 500g</li>
-                        <li>śmietana 18% 200 ml</li>
-                        <li>Rama Smaż jak szef kuchni, wariant klasyczny 4 łyżki</li>
-                        <li>gałązka tymianku 1 szt.</li>
                     </ul>
                 </div>
             </div>
