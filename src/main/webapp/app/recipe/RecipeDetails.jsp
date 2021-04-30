@@ -23,7 +23,7 @@
             Zaplanuj <span>Jedzonko</span>
         </a>
         <div class="d-flex justify-content-around">
-            <h4 class="text-light mr-3">Imię</h4>
+            <h4 class="text-light mr-3">${firstName}</h4>
             <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
         </div>
     </nav>
@@ -72,17 +72,10 @@
                             <p>${detail.preparation}</p>
                         </div>
                         <div class="col-2"></div>
-                        <ul class="col-5 p-4 list-unstyled">
-                            <li>${detail.ingredients}</li>
-                            <li>ziemniaki 500g</li>
-                            <li>Fix Naturalnie makaronowa z szynką Knorr 1 szt.</li>
-                            <li>średnia cebula 1szt.</li>
-                            <li>ząbek czosnku 1szt.</li>
-                            <li>kiełbasa np. śląska 500g</li>
-                            <li>śmietana 18% 200 ml</li>
-                            <li>Rama Smaż jak szef kuchni, wariant klasyczny 4 łyżki</li>
-                            <li>gałązka tymianku 1 szt.</li>
-                        </ul>
+                        <div class="col-5 p-4">
+                            <p><PRE style="font-family: Open Sans, sans-serif;
+                            font-weight: 400; font-size: 1.2rem;">${detail.ingredients}</PRE></p>
+                        </div>
                     </div>
 
                 </div>
