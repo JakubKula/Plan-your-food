@@ -53,7 +53,7 @@
                             <div class="col-sm-3">
                                 <select class="form-control" id="choosePlan" name="choosePlan">
                                     <c:forEach var="listOfPlans" items="${listOfPlans}">
-                                    <option>${listOfPlans.name}</option>
+                                    <option value="${listOfPlans.id}">${listOfPlans.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -81,7 +81,7 @@
                             <div class="col-sm-4">
                                 <select class="form-control" id="recipie" name="recipeId">
                                     <c:forEach var="RecipeForAdminList" items="${RecipeForAdminList}" >
-                                    <option>${RecipeForAdminList.name}</option>
+                                    <option value="${RecipeForAdminList.id}">${RecipeForAdminList.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -93,7 +93,7 @@
                             <div class="col-sm-2">
                                 <select class="form-control" id="day" name="dayNameId">
                                     <c:forEach var="DayNamesList" items="${DayNamesList}" >
-                                    <option>${DayNamesList.name}</option>
+                                    <option value="${DayNamesList.id}">${DayNamesList.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>

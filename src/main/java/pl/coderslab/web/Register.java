@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/app/main/register.jsp");
+        getServletContext().getRequestDispatcher("/app/main/register.jsp").forward(request, response);
 
     }
 
@@ -23,9 +23,15 @@ public class Register extends HttpServlet {
         String surname = request.getParameter("surname");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        Admin admin = new Admin(name,surname,email,password);
         AdminDao adminDao =new AdminDao();
-        adminDao.create(admin);
-        response.sendRedirect("/login");
+        Admin adminUnique = adminDao.readByEmail(email);
+        if(adminUnique.getEmail() != null){
+            getServletContext().getRequestDispatcher("/app/user/uniqueLogin.jsp").forward(request, response);
+        }else{
+            Admin admin = new Admin(name,surname,email,password);
+            adminDao.create(admin);
+            getServletContext().getRequestDispatcher("/login").forward(request, response);
+        }
+
     }
 }

@@ -3,6 +3,8 @@
 
 <%@include file="../../header.jsp"%>
 
+<script src="js/app.js" type="text/javascript"></script>
+
 <section>
     <div class="row padding-small">
         <i class="fas fa-users icon-users"></i>
@@ -15,6 +17,9 @@
 <section class="mr-4 ml-4">
     <div class="m-4 p-3 width-medium">
         <div class="dashboard-content border-dashed p-3 m-4 view-height">
+            <div>
+            <input id="tagInput" type="text" placeholder="Wyszukaj po nazwie lub opisie" style="margin: 0 auto; padding: 10px; font-size: 17px; border: 2px solid grey; width: 100%; ">
+            </div>
             <table class="table border-bottom schedules-content">
                 <thead>
                 <tr class="d-flex text-color-darker">
@@ -29,10 +34,10 @@
                     <tr class="d-flex">
                         <th scope="row" class="col-1">${list.id}</th>
                         <c:set var="name" value="${list.id}" scope="session" />
-                        <td class="col-5">
+                        <td class="col-5" data-tag="${list.name}">
                                 ${list.name}
                         </td>
-                        <td class="col-5">
+                        <td class="col-5" data-tag="${list.description}">
                                 ${list.description}
                         </td>
                         <td class="col-1"><a href="/app/main/details?id=${list.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a>
