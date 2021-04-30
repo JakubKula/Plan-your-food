@@ -18,10 +18,12 @@ public class AdminDao {
     private static final String FIND_ALL_ADMINS_QUERY = "SELECT * FROM admins;";
     private static final String READ_ADMIN_QUERY = "SELECT * FROM admins WHERE id = ?;";
     private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET first_name = ? , last_name = ?, email = ? WHERE id = ?;";
-    private static final String READ_PASSWORD_QUERY = "SELECT password FROM admins WHERE email = ?;";
+    private static final String READ_PASSWORD_QUERY = "SELECT password, enable FROM admins WHERE email = ?;";
     private static final String READ_ADMIN_EMAIL_QUERY = "SELECT * FROM admins WHERE email = ?;";
     private static final String UPDATE_ADMIN_PASSWORD_QUERY = "UPDATE admins SET password = ? WHERE id = ?;";
-    private static final String CHECK_IF_SUPERADMIN = "SELECT superadmin FROM admins where email = ?;;";
+    private static final String CHECK_IF_SUPERADMIN = "SELECT superadmin FROM admins where email = ?;";
+    private static final String BLOCK_USER = "UPDATE admins SET enable = 0 WHERE id = ?;";
+    private static final String UNBLOCK_USER = "UPDATE admins SET enable = 1 WHERE id = ?;";
 
     public Admin read(Integer adminId) {
         Admin admin = new Admin();
@@ -59,6 +61,7 @@ public class AdminDao {
                 adminToAdd.setLastName(resultSet.getString("last_name"));
                 adminToAdd.setEmail(resultSet.getString("email"));
                 adminToAdd.setPassword(resultSet.getString("password"));
+                adminToAdd.setEnable(resultSet.getInt("enable"));
                 adminList.add(adminToAdd);
             }
         } catch (SQLException e) {
@@ -126,8 +129,8 @@ public class AdminDao {
         }
     }
 
-    public boolean verification (String email, String password){
-        boolean verification = false;
+    public String verification (String email, String password){
+        String verification = "bad";
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(READ_PASSWORD_QUERY)
         ) {
@@ -135,11 +138,15 @@ public class AdminDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     String passwordHashed = resultSet.getString("password");
-                    if (BCrypt.checkpw(password, passwordHashed)){
-                        verification = true;
-                    }else {
-                        verification = false;
+                    int enable = resultSet.getInt("enable");
+                    if(enable == 1){
+                        if (BCrypt.checkpw(password, passwordHashed)){
+                            verification = "log";
+                        }
+                    }else{
+                        verification = "block";
                     }
+
                 }
             }
         } catch (Exception e) {
@@ -198,6 +205,26 @@ public class AdminDao {
             e.printStackTrace();
         }
         return superAdmin;
+    }
+
+    public void block(int adminId) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(BLOCK_USER)) {
+            statement.setInt(1, adminId);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void unblock(int adminId) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UNBLOCK_USER)) {
+            statement.setInt(1, adminId);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

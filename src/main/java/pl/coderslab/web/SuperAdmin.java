@@ -21,8 +21,10 @@ public class SuperAdmin extends HttpServlet {
             boolean isSuperAdmin = (boolean) session.getAttribute("superadmin");
             request.setAttribute("superAdmin", isSuperAdmin);
         }
+        int enable = 1;
         request.setAttribute("firstName",firstName);
         request.setAttribute("list", adminList);
+        request.setAttribute("enable", enable);
         getServletContext().getRequestDispatcher("/app/user/superadmin.jsp").forward(request, response);
     }
 
