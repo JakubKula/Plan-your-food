@@ -17,12 +17,18 @@ public class RecipeDetails extends HttpServlet {
         String idString = request.getParameter("id");
         int id = Integer.parseInt(idString);
 
+
         RecipieDao recipieDao = new RecipieDao();
         Recipie recipe = recipieDao.read(id);
 
         response.getWriter().println(recipieDao.read(id));
         HttpSession session = request.getSession();
         session.setAttribute("detail", recipe);
+
+        if((boolean) session.getAttribute("superadmin")){
+            boolean isSuperAdmin = (boolean) session.getAttribute("superadmin");
+            request.setAttribute("superAdmin", isSuperAdmin);
+        }
 
         getServletContext().getRequestDispatcher("/app/recipe/RecipeDetails.jsp")
                 .forward(request, response);

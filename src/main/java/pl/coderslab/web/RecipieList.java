@@ -25,6 +25,11 @@ public class RecipieList extends HttpServlet {
       String adminId =   adminInt.toString();
       int admin = Integer.parseInt(adminId);
 
+        if((boolean) session.getAttribute("superadmin")){
+            boolean isSuperAdmin = (boolean) session.getAttribute("superadmin");
+            request.setAttribute("superAdmin", isSuperAdmin);
+        }
+
         String name = (String)session.getAttribute("firstName");
         session.setAttribute("firstName" , name);
 
