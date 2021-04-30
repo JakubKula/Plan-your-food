@@ -13,6 +13,13 @@ public class Plan {
 
     }
 
+    public Plan(String name, String description, Date created, int adminId) {
+        this.name = name;
+        this.description = description;
+        this.created = created;
+        this.adminId = adminId;
+    }
+
     public Plan(int id, String name, String description, Date created) {
         this.id = id;
         this.name = name;

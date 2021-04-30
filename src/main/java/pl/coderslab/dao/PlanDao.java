@@ -169,7 +169,7 @@ public class PlanDao {
     }
 
     public String recentPlanName(int adminId) {
-        String result = "abc";
+        String result = "";
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(RECENT_PLAN_NAME_QUERY)) {
             statement.setInt(1, adminId);
