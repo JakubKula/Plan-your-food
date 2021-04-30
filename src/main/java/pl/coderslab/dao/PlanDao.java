@@ -10,18 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlanDao {
-    private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name,description,created,adminId) VALUES (?,?,?,?);";
+    private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name,description,created,admin_id) VALUES (?,?,?,?);";
     private static final String DELETE_PLAN_QUERY = "DELETE FROM plan WHERE id = ?;";
-    private static final String FIND_ALL_PLANS_BY_ADMIN_QUERY = "SELECT * FROM plan WHERE id = ?;";
+    private static final String FIND_ALL_PLANS_BY_ADMIN_QUERY = "SELECT * FROM plan WHERE admin_id = ?;";
     private static final String READ_PLAN_QUERY = "SELECT * from plan WHERE id = ?;";
-    private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ?, created = ?, adminId = ? WHERE	id = ?;";
-    private static final String PLANS_NUMBER_QUERY = "SELECT COUNT(adminId) AS plans FROM plan WHERE adminId = ?;";
+    private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ?, created = ?, admin_id = ? WHERE id = ?;";
+    private static final String PLANS_NUMBER_QUERY = "SELECT COUNT(admin_id) AS plans FROM plan WHERE admin_id = ?;";
     private static final String RECENT_PLAN_QUERY = "SELECT day_name.name as day_name, meal_name,  recipe.name as recipe_name, recipe.description as recipe_description " +
             "FROM `recipe_plan` " +
             "JOIN day_name on day_name.id=day_name_id " +
             "JOIN recipe on recipe.id=recipe_id WHERE " +
             "recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?) " +
             "ORDER by day_name.display_order, recipe_plan.display_order;";
+    private static final String RECENT_PLAN_NAME_QUERY = "SELECT MAX(created), name FROM plan WHERE admin_id = ?;";
 
     public Plan read(Integer planId) {
         Plan plan = new Plan();
@@ -35,7 +36,7 @@ public class PlanDao {
                     plan.setName(resultSet.getString("name"));
                     plan.setDescription(resultSet.getString("description"));
                     plan.setCreated(resultSet.getDate("created"));
-                    plan.setId(resultSet.getInt("adminId"));
+                    plan.setId(resultSet.getInt("admin_id"));
                 }
             }
         } catch (Exception e) {
@@ -154,9 +155,8 @@ public class PlanDao {
                     PlanDetails planDetails = new PlanDetails();
 
                     planDetails.setDayName(resultSet.getString("day_name"));
-                    planDetails.setDayName(resultSet.getString("meal_name"));
-                    planDetails.setDayName(resultSet.getString("recipe_name"));
-                    planDetails.setDayName(resultSet.getString("recipe_description"));
+                    planDetails.setMealName(resultSet.getString("meal_name"));
+                    planDetails.setRecipeName(resultSet.getString("recipe_name"));
 
                     result.add(planDetails);
                 }
@@ -167,4 +167,22 @@ public class PlanDao {
         }
         return null;
     }
+
+    public String recentPlanName(int adminId) {
+        String result = "abc";
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(RECENT_PLAN_NAME_QUERY)) {
+            statement.setInt(1, adminId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    result = resultSet.getString("name");
+                }
+                return result;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
