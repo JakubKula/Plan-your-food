@@ -23,28 +23,28 @@
 <section >
     <div class="border-dashed view-height w-100">
         <div class="mt-4 ml-4 mr-4">
-            <table class="display" style="width:98%" id="table" >
+            <table class="table table-striped table-bordered display" style="width:98% " id="table" >
                 <thead >
-                <tr class="text-color-darker" style="display: flex;">
-                    <th class="col-1">ID</th>
-                    <th class="col-5">NAZWA</th>
-                    <th class="col-5">OPIS</th>
-                    <th class="col-1">AKCJE</th>
+                <tr>
+                    <th width="5%">ID        </th>
+                    <th width="20%">NAZWA         </th>
+                    <th width="70%">OPIS          </th>
+                    <th width="5%">AKCJE         </th>
                 </tr>
                 </thead>
-                <tbody class="text-color-lighter">
+                <tbody>
                 <c:forEach var="list" items="${list}" >
-                    <tr class="d-flex">
-                        <td class="col-1">${list.id}</td>
+                    <tr>
+                        <td>${list.id}</td>
 <%--                        <c:set var="name" value="${list.id}" scope="session" />--%>
-                        <td class="col-5" data-tag="${list.name}">
+                        <td data-tag="${list.name}">
                                 ${list.name}
                         </td>
-                        <td class="col-5" data-tag="${list.description}">
+                        <td data-tag="${list.description}">
                                 ${list.description}
                         </td>
-                        <td class="col-1">
-                            <a href="/app/main/details?id=${list.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a>
+                        <td>
+                            <a href="/app/main/details?id=${list.id}" class="btn btn-info rounded-0 text-light" style="justify-self: auto; display: block">Szczegóły</a>
                         </td>
                     </tr>
                 </c:forEach>
