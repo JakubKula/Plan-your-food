@@ -20,8 +20,10 @@
 </section>
 
 <%--    <div class="m-4 p-3 width-medium">--%>
-<section class="mr-4 ml-4">
-            <table class="display" style="width:100%" id="table" >
+<section >
+    <div class="border-dashed view-height w-100">
+        <div class="mt-4 ml-4 mr-4">
+            <table class="display" style="width:98%" id="table" >
                 <thead >
                 <tr class="text-color-darker" style="display: flex;">
                     <th class="col-1">ID</th>
@@ -48,6 +50,8 @@
                 </c:forEach>
                 </tbody>
             </table>
+        </div>
+    </div>
 </section>
 
 <footer class="footer-section pt-3 pb-3">
