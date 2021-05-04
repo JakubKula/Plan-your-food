@@ -32,12 +32,17 @@ public class EditUserPassword extends HttpServlet {
         String verification = adminDao.verification(email,activePass);
         String firstName = (String) session.getAttribute("firstName");
         request.setAttribute("firstName",firstName);
-        if(verification.equals("log")){
-            String newPassword = request.getParameter("newPass");
-            adminDao.updatePassword(id, newPassword);
-            getServletContext().getRequestDispatcher("/app/user/edited.jsp").forward(request, response);
+        String newPassword = request.getParameter("newPass");
+        String newPassword2 = request.getParameter("newPass2");
+        if(newPassword2.equals(newPassword)){
+            if(verification.equals("log")){
+                adminDao.updatePassword(id, newPassword);
+                getServletContext().getRequestDispatcher("/app/user/edited.jsp").forward(request, response);
+            }else {
+                getServletContext().getRequestDispatcher("/app/user/wrongPass.jsp").forward(request, response);
+            }
         }else {
-            getServletContext().getRequestDispatcher("/app/user/wrongPass.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/app/user/editPassNotSame.jsp").forward(request, response);
         }
 
     }

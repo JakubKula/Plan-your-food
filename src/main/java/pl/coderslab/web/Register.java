@@ -23,15 +23,21 @@ public class Register extends HttpServlet {
         String surname = request.getParameter("surname");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        AdminDao adminDao =new AdminDao();
-        Admin adminUnique = adminDao.readByEmail(email);
-        if(adminUnique.getEmail() != null){
-            getServletContext().getRequestDispatcher("/app/user/uniqueLogin.jsp").forward(request, response);
-        }else{
-            Admin admin = new Admin(name,surname,email,password);
-            adminDao.create(admin);
-            getServletContext().getRequestDispatcher("/login").forward(request, response);
+        String password2 = request.getParameter("password2");
+        if(password2.equals(password)){
+            AdminDao adminDao =new AdminDao();
+            Admin adminUnique = adminDao.readByEmail(email);
+            if(adminUnique.getEmail() != null){
+                getServletContext().getRequestDispatcher("/app/user/uniqueLogin.jsp").forward(request, response);
+            }else{
+                Admin admin = new Admin(name,surname,email,password);
+                adminDao.create(admin);
+                getServletContext().getRequestDispatcher("/login").forward(request, response);
+            }
+        }else {
+            getServletContext().getRequestDispatcher("/app/user/passNotSame.jsp").forward(request, response);
         }
+
 
     }
 }
