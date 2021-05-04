@@ -1,12 +1,15 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.AboutDao;
+import pl.coderslab.model.About;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "About", value = "/about")
-public class About extends HttpServlet {
+public class AboutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -18,6 +21,13 @@ public class About extends HttpServlet {
                 request.setAttribute("name",name);
             }
         }
+        AboutDao aboutDao = new AboutDao();
+        About about = new About();
+        about = aboutDao.read(1);
+        String topic = about.getTopic();
+        String description = about.getDescription();
+        request.setAttribute("topic",topic);
+        request.setAttribute("description",description);
         getServletContext().getRequestDispatcher("/app/main/about.jsp").forward(request, response);
     }
 
