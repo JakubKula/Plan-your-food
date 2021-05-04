@@ -23,7 +23,6 @@ public class PlanList extends HttpServlet {
         }
 
         int adminId = Integer.parseInt(session.getAttribute("id").toString());
-
         session.setAttribute("firstName" , (String)session.getAttribute("firstName"));
 
         PlanDao p = new PlanDao();
