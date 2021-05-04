@@ -17,7 +17,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/app-schedules.html">
+    <a class="nav-link" href="/app/plan/list">
         <span>Plany</span>
         <i class="fas fa-angle-right"></i>
     </a>
@@ -49,3 +49,5 @@
     </ul>
     </c:otherwise>
 </c:choose>
+</div>
+</section>
