@@ -71,7 +71,7 @@
                   }
                 </script>
                 <a href="/app/plan/details?planId=${plan.id}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
-                <a href="/app/plan/edit" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
+                <a href="/app/plan/edit?planId=${plan.id}" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
               </td>
             </tr>
             </tbody>
