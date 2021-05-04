@@ -6,6 +6,7 @@ public class MealInPlan {
     private String recipeName;
     private String recipeDescription;
     private int recipeId;
+    private int id;
 
     public MealInPlan() {
     }
@@ -26,9 +27,17 @@ public class MealInPlan {
         this.mealName = mealName;
     }
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getRecipeId() {
         return recipeId;
     }
+
     public void setRecipeId(int recipeId) {
         this.recipeId = recipeId;
     }
@@ -56,7 +65,8 @@ public class MealInPlan {
                 ", mealName='" + mealName + '\'' +
                 ", recipeName='" + recipeName + '\'' +
                 ", recipeDescription='" + recipeDescription + '\'' +
-                ", recipeId='" + recipeId + '\'' +
+                ", recipeId=" + recipeId +
+                ", id=" + id +
                 '}';
     }
 }

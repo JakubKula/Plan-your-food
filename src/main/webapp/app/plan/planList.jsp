@@ -40,7 +40,7 @@
             <h3 class="color-header text-uppercase">LISTA PLANÓW</h3>
           </div>
           <div class="col d-flex justify-content-end mb-2 noPadding">
-            <a href="app-add-schedules.html" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj plan</a>
+            <a href="/app/plan/add" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj plan</a>
           </div>
         </div>
 
@@ -70,8 +70,8 @@
                       parent.location.replace("/app/plan/remove?PlanIdentity="+id);}
                   }
                 </script>
-                <a href="/app-details-schedules.html" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
-                <a href="/app-edit-schedules.html" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
+                <a href="/app/plan/details?planId=${plan.id}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
+                <a href="/app/plan/edit" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
               </td>
             </tr>
             </tbody>

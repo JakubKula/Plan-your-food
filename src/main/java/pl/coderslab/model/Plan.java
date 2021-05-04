@@ -71,10 +71,9 @@ public class Plan {
         this.created = created;
     }
     
-    public void setadminId(int adminId) {
+    public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
-
 
 
     @Override
@@ -84,7 +83,7 @@ public class Plan {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", created=" + created +
+                ", adminId=" + adminId +
                 '}';
     }
-    
 }

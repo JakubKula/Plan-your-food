@@ -62,7 +62,6 @@
               </div>
             </div>
           </div>
-
           <c:forEach var="dayName" items="${dayNames}">
           <table class="table">
             <thead>
@@ -80,7 +79,15 @@
                   <td class="col-2">${mealInPlan.mealName}</td>
                   <td class="col-7">${mealInPlan.recipeName}</td>
                   <td class="col-1 center">
-                    <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
+                    <a onclick="javascript:confirmDelete(${mealInPlan.id}, ${plan.id});" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
+                    <script type="text/javascript">
+                      function confirmDelete(id, planId) {
+                        var status = confirm("Are you sure you want to delete?");
+                        if(status)
+                        {
+                          parent.location.replace("/app/plan/deleteMealFromPlan?id="+id+"&planId="+planId);}
+                      }
+                    </script>
                   </td>
                   <td class="col-2 center">
                     <a href="/app/recipe/details?id=${mealInPlan.recipeId}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
