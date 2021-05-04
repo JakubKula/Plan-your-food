@@ -22,10 +22,13 @@ public class Login extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         AdminDao adminDao = new AdminDao();
-        boolean logIN = adminDao.verification(email, password);
+        String logIN = adminDao.verification(email, password);
         HttpSession session = request.getSession();
         session.setAttribute("login", "");
-        if(logIN){
+        if(logIN.equals("block")){
+            getServletContext().getRequestDispatcher("/app/user/userblocked.jsp").forward(request, response);
+        }
+        if(logIN.equals("log")){
             Admin admin = adminDao.readByEmail(email);
             session.setAttribute("login", true);
             session.setAttribute("id",admin.getId());
@@ -42,7 +45,7 @@ public class Login extends HttpServlet {
             response.sendRedirect("/");
 //            getServletContext().getRequestDispatcher("/").forward(request, response);//nie wiem na razie tak jest
         }
-        if(!logIN) {
+        if(logIN.equals("bad")) {
             PrintWriter out = response.getWriter();
 //            out.println("<meta http-equiv='refresh' content='3;URL=login.jsp'>");//redirects after 3 seconds
 //            out.println("<p style='color:red;'>User or password incorrect!</p>");

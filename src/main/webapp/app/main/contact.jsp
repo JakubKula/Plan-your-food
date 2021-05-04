@@ -9,20 +9,19 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3 class="mb-4">Lorem ipsum dolor</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna.</p>
+                <h3 class="mb-4">${topic1}</h3>
+                <p>${description1}</p>
             </div>
             <div class="col pl-4 ml-4">
-                <h3 class="mb-4">Lorem ipsum dolor</h3>
+                <h3 class="mb-4">${topic2}</h3>
                 <ul class="container">
-                    <li>consectetur adipiscing elit</li>
-                    <li>sed do eiusmod tempor</li>
-                    <li>incididunt ut labore</li>
-                    <li>et dolore magna aliqua</li>
+                    <c:forEach var="list" items="${list}" >
+                            <li>${list}</li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="col">
-                <h3 class="mb-4">Lorem ipsum dolor</h3>
+                <h3 class="mb-4">${topic3}</h3>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control border-0 rounded-0" placeholder=""
                            aria-label="Recipient's username" aria-describedby="basic-addon2">

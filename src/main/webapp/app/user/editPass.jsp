@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <title>Edit_password</title>
+    <title>Edit password</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Zaplanuj Jedzonko</title>
@@ -62,7 +62,7 @@
                             <tr class="d-flex">
                                 <th scope="row" class="col-2"><h4>Powtórz hasło</h4></th>
                                 <td class="col-7">
-                                    <input class="w-100 p-1" value="" name="newPass" required type="password">
+                                    <input class="w-100 p-1" value="" name="newPass2" required type="password">
                                 </td>
                             </tr>
                             </tbody>

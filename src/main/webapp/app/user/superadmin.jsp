@@ -65,9 +65,18 @@
               <td class="col-6">
                   ${list.lastName}
               </td>
-              <td class="col-2 center">
-              <a href="#" class="btn btn-danger rounded-0 text-light m-1">Blokuj</a>
-              </td>
+              <c:choose>
+                <c:when test="${list.enable.equals(enable)}">
+                  <td class="col-2 center">
+                    <a href="/block/user?id=${list.id}&firstName=${list.firstName}&lastName=${list.lastName}&block=yes" class="btn btn-danger rounded-0 text-light m-1">Blokuj</a>
+                  </td>
+                </c:when>
+                <c:otherwise>
+                  <td class="col-2 center">
+                    <a href="/block/user?id=${list.id}&firstName=${list.firstName}&lastName=${list.lastName}&block=no" class="btn btn-danger rounded-0 text-light m-1">Odblokuj</a>
+                  </td>
+                </c:otherwise>
+              </c:choose>
             </tr>
             </c:forEach>
             </tbody>

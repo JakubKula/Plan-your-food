@@ -25,9 +25,10 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="podaj hasło" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="repassword" name="password" placeholder="powtórz hasło" required>
+                        <input type="password" class="form-control" id="repassword" name="password2" placeholder="powtórz hasło" required >
                     </div>
                     <button class="btn btn-color rounded-0" type="submit">Zarejestruj</button>
+                    <p>${message}</p>
                 </form>
             </div>
         </div>
