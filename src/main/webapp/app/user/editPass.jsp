@@ -62,7 +62,7 @@
                             <tr class="d-flex">
                                 <th scope="row" class="col-2"><h4>Powtórz hasło</h4></th>
                                 <td class="col-7">
-                                    <input class="w-100 p-1" value="" name="newPass" required type="password">
+                                    <input class="w-100 p-1" value="" name="newPass2" required type="password">
                                 </td>
                             </tr>
                             </tbody>
