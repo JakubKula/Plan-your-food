@@ -16,13 +16,13 @@ public class PlanDao {
     private static final String READ_PLAN_QUERY = "SELECT * from plan WHERE id = ?;";
     private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ?, created = ?, admin_id = ? WHERE id = ?;";
     private static final String PLANS_NUMBER_QUERY = "SELECT COUNT(admin_id) AS plans FROM plan WHERE admin_id = ?;";
-    private static final String RECENT_PLAN_QUERY = "SELECT day_name.name as day_name, meal_name,  recipe.name as recipe_name, recipe.description as recipe_description " +
+    private static final String RECENT_PLAN_QUERY = "SELECT day_name.name as day_name, meal_name,  recipe.name as recipe_name, recipe.description as recipe_description, recipe.id as recipe_id " +
             "FROM `recipe_plan` " +
             "JOIN day_name on day_name.id=day_name_id " +
             "JOIN recipe on recipe.id=recipe_id WHERE " +
             "recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?) " +
             "ORDER by day_name.display_order, recipe_plan.display_order;";
-    private static final String RECENT_PLAN_NAME_QUERY = "SELECT name FROM plan WHERE admin_id = 1 ORDER BY created DESC LIMIT 1;";
+    private static final String RECENT_PLAN_NAME_QUERY = "SELECT name FROM plan WHERE admin_id = ? ORDER BY created DESC LIMIT 1;";
 
     public Plan read(Integer planId) {
         Plan plan = new Plan();
@@ -157,6 +157,7 @@ public class PlanDao {
                     planDetails.setDayName(resultSet.getString("day_name"));
                     planDetails.setMealName(resultSet.getString("meal_name"));
                     planDetails.setRecipeName(resultSet.getString("recipe_name"));
+                    planDetails.setRecipeId(resultSet.getInt("recipe_id"));
 
                     result.add(planDetails);
                 }
