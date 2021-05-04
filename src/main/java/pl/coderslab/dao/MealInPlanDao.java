@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MealInPlanDao {
-    private static final String FIND_ALL_MEALS_IN_PLAN_QUERY = "SELECT day_name.name as day_name, meal_name, recipe.name as recipe_name, recipe.description as recipe_description\n" +
+    private static final String FIND_ALL_MEALS_IN_PLAN_QUERY = "SELECT day_name.name as day_name, meal_name, recipe.name as recipe_name, recipe.description as recipe_description, recipe.id as recipe_id\n" +
             "FROM `recipe_plan`\n" +
             "JOIN day_name on day_name.id=day_name_id\n" +
             "JOIN recipe on recipe.id=recipe_id WHERE plan_id = ?\n" +
@@ -31,6 +31,7 @@ public class MealInPlanDao {
                     mealInPlanToAdd.setMealName(resultSet.getString("meal_name"));
                     mealInPlanToAdd.setRecipeName(resultSet.getString("recipe_name"));
                     mealInPlanToAdd.setRecipeDescription(resultSet.getString("recipe_description"));
+                    mealInPlanToAdd.setRecipeId(resultSet.getInt("recipe_id"));
                     mealInPlanList.add(mealInPlanToAdd);
                 }
             }

@@ -27,8 +27,7 @@ public class PlanDetailsServlet extends HttpServlet {
             boolean isSuperAdmin = (boolean) session.getAttribute("superadmin");
             request.setAttribute("superAdmin", isSuperAdmin);
         }
-//        int planId = 6;
-        int planId = Integer.parseInt(request.getAttribute("planId").toString());
+        int planId = Integer.parseInt(request.getParameter("planId"));
         session.setAttribute("firstName" , (String)session.getAttribute("firstName"));
 
         PlanDao p = new PlanDao();
