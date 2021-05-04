@@ -18,6 +18,12 @@ public class AddPlan extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        if((boolean) session.getAttribute("superadmin")){
+            boolean isSuperAdmin = (boolean) session.getAttribute("superadmin");
+            request.setAttribute("superAdmin", isSuperAdmin);
+        }
+
         getServletContext().getRequestDispatcher("/app/plan/addPlan.jsp").forward(request, response);
     }
 
@@ -27,10 +33,6 @@ public class AddPlan extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
 
-        if((boolean) session.getAttribute("superadmin")){
-            boolean isSuperAdmin = (boolean) session.getAttribute("superadmin");
-            request.setAttribute("superAdmin", isSuperAdmin);
-        }
 
         String name = request.getParameter("name");
         String description = request.getParameter("description");
