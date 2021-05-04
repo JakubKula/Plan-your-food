@@ -52,7 +52,7 @@
                                 Nazwa planu
                             </label>
                             <div class="col-sm-10">
-                                <input class="form-control" value="Plan jarski na bezmięsny tydzień" id="planName" placeholder="Nazwa planu">
+                                <input class="form-control" value="" id="planName" name="planName" placeholder="Nazwa planu">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -60,9 +60,7 @@
                                 Opis planu
                             </label>
                             <div class="col-sm-10">
-                                    <textarea name="planDescription" class="form-control" rows="5" id="planDescription" placeholder="Opis plany">
-Pojęcie kuchnia wegetariańska określa pożywienie, które ani nie zawiera mięsa, ani nie zostało przygotowane na bazie pochodzącej z mięsa (np. na rosole drobiowym). Laktoowowegetarianie (najczęściej spotykany typ wegetarian w zachodnim świecie) spożywają nabiał, laktowegetarianie wykluczają jaja, ale nie inne produkty nabiałowe.
-                                    </textarea>
+                                    <textarea name="planDescription" class="form-control" rows="5" id="planDescription" placeholder="Opis planu"></textarea>
                             </div>
                         </div>
 

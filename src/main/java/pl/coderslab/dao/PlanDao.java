@@ -35,7 +35,7 @@ public class PlanDao {
                     plan.setId(resultSet.getInt("id"));
                     plan.setName(resultSet.getString("name"));
                     plan.setDescription(resultSet.getString("description"));
-                    plan.setCreated(resultSet.getDate("created"));
+                    plan.setCreated(resultSet.getString("created"));
                     plan.setAdminId(resultSet.getInt("admin_id"));
                 }
             }
@@ -58,7 +58,7 @@ public class PlanDao {
                     planToAdd.setId(resultSet.getInt("id"));
                     planToAdd.setName(resultSet.getString("name"));
                     planToAdd.setDescription(resultSet.getString("description"));
-                    planToAdd.setCreated(resultSet.getDate("created"));
+                    planToAdd.setCreated(resultSet.getString("created"));
                     planList.add(planToAdd);
                 }
             }
@@ -75,7 +75,7 @@ public class PlanDao {
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             insertStm.setString(1, plan.getName());
             insertStm.setString(2, plan.getDescription());
-            insertStm.setDate(3, (Date) plan.getCreated());
+            insertStm.setString(3, plan.getCreated());
             insertStm.setInt(4, plan.getAdminId());
             int result = insertStm.executeUpdate();
 
@@ -119,7 +119,7 @@ public class PlanDao {
             statement.setInt(5, plan.getId());
             statement.setString(1, plan.getName());
             statement.setString(2, plan.getDescription());
-            statement.setDate(3, (Date) plan.getCreated());
+            statement.setString(3, plan.getCreated());
             statement.setInt(4, plan.getAdminId());
 
             statement.executeUpdate();

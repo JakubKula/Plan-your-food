@@ -18,6 +18,12 @@ public class AddPlan extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        if((boolean) session.getAttribute("superadmin")){
+            boolean isSuperAdmin = (boolean) session.getAttribute("superadmin");
+            request.setAttribute("superAdmin", isSuperAdmin);
+        }
+
         getServletContext().getRequestDispatcher("/app/plan/addPlan.jsp").forward(request, response);
     }
 
@@ -27,18 +33,20 @@ public class AddPlan extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
 
-        if((boolean) session.getAttribute("superadmin")){
-            boolean isSuperAdmin = (boolean) session.getAttribute("superadmin");
-            request.setAttribute("superAdmin", isSuperAdmin);
-        }
+        String name = request.getParameter("planName");
+        String description = request.getParameter("planDescription");
 
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        Date created = new Date(System.currentTimeMillis());
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        String created = (formatter.format(date));
+
         int adminId = Integer.parseInt(session.getAttribute("id").toString());
 
         PlanDao p = new PlanDao();
-        p.create(new Plan(name, description, created, adminId));
-        getServletContext().getRequestDispatcher("/app/plan/list").forward(request, response);
+        Plan plan = new Plan(name, description, created, adminId);
+        p.create(plan);
+
+        response.sendRedirect("/app/plan/list");
+
     }
 }

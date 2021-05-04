@@ -6,28 +6,28 @@ public class Plan {
     private int id;
     private String name;
     private String description;
-    private Date created;
+    private String created;
     private int adminId;
 
     public Plan() {
 
     }
 
-    public Plan(String name, String description, Date created, int adminId) {
+    public Plan(String name, String description, String created, int adminId) {
         this.name = name;
         this.description = description;
         this.created = created;
         this.adminId = adminId;
     }
 
-    public Plan(int id, String name, String description, Date created) {
+    public Plan(int id, String name, String description, String created) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.created = created;
     }
 
-    public Plan(int id, String name, String description, Date created, int adminId) {
+    public Plan(int id, String name, String description, String created, int adminId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -63,11 +63,11 @@ public class Plan {
         this.description = description;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
         this.created = created;
     }
     
