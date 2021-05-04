@@ -60,7 +60,16 @@
               <td class="col-1">${plan.id}</td>
               <td class="col-2">${plan.name}</td>
               <td class="col-7">${plan.description}</td>
-              <td class="col-2 d-flex align-items-center justify-content-center flex-wrap"><a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
+              <td class="col-2 d-flex align-items-center justify-content-center flex-wrap">
+                <a onclick="javascript:confirmDelete(${plan.id});" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
+                <script type="text/javascript">
+                  function confirmDelete(id) {
+                    var status = confirm("Are you sure you want to delete?");
+                    if(status)
+                    {
+                      parent.location.replace("/app/plan/remove?PlanIdentity="+id);}
+                  }
+                </script>
                 <a href="/app-details-schedules.html" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
                 <a href="/app-edit-schedules.html" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
               </td>
