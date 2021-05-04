@@ -27,6 +27,11 @@ public class AddRecipeToPlan extends HttpServlet {
         String name = (String) session3.getAttribute("firstName");
         session3.setAttribute("firstName", name);
 
+        if((boolean) session3.getAttribute("superadmin")){
+            boolean isSuperAdmin = (boolean) session3.getAttribute("superadmin");
+            request.setAttribute("superAdmin", isSuperAdmin);
+        }
+
         Object adminInt = session3.getAttribute("id");
         String adminId = adminInt.toString();
         int admin = Integer.parseInt(adminId);
