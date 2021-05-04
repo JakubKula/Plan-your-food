@@ -36,7 +36,7 @@ public class PlanDao {
                     plan.setName(resultSet.getString("name"));
                     plan.setDescription(resultSet.getString("description"));
                     plan.setCreated(resultSet.getDate("created"));
-                    plan.setId(resultSet.getInt("admin_id"));
+                    plan.setAdminId(resultSet.getInt("admin_id"));
                 }
             }
         } catch (Exception e) {
