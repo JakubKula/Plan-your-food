@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context>
+<web-app>
     <Resource name="jdbc/scrumlab"
               auth="Container"
               type="javax.sql.DataSource"
@@ -11,4 +11,4 @@
               maxTotal="100"
               maxIdle="30"
               maxWaitMillis="10000" />
-</Context>
+</web-app>
